@@ -1,7 +1,7 @@
 import sys, pygame
 from pygame.locals import *
 import pygcurse
-import np
+import numpy as np
 pygame.init()
 
 mapwidth, mapheight = 80, 40
