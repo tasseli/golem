@@ -9,7 +9,7 @@ win = pygcurse.PygcurseWindow(mapwidth, mapheight)
 win.autoupdate = False
 cave = np.ones((mapwidth, mapheight))
 
-def rooms():
+def create_rooms_recursive():
     roomcenters = []
     def binroom(corners, axis):
         #print(repr(corners))
@@ -62,7 +62,7 @@ def rooms():
             cave[coords[0], coords[1]] = 0
         roomsconnected[i] = 1
     
-rooms()     
+create_rooms_recursive()     
 
 class Creature():
     def __init__(self):
