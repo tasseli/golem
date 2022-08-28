@@ -16,8 +16,11 @@ def erode(x, y):
             erode(neighbor[0], neighbor[1])
 
 def create_rooms_mikae1():
-    #randomize amount of rooms
-	#draw first room
+	rooms_to_be_created = np.random.randint(2, 11)
+		#randomize a room center so it's at least 2 from the nearest edge
+		#randomize room width and height so it's drawn at least 1 from nearest edge
+			#must be 3-20 each
+		#draw room by its coords as follows: e.g. cave[4:8, 4:12] = 0
 	#while there's room left, attempt to draw more rooms up to amount
 	#connect rooms with corridors
 
