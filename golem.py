@@ -18,15 +18,11 @@ def erode(x, y):
 def create_rooms_mikae1():
 	rooms_to_be_created = np.random.randint(2, 11)
 	first_room_center = np.random.randint(2, mapwidth-2), np.random.randint(2, mapheight-2)
-#	print(first_room_center)
 	first_dimensions = np.random.randint(3, 21), np.random.randint(3, 21) #I should probably check the upper limit values
-	#maximize starting coordinates between a min value per dimensions and 1, so we're not nulling border row
+	#maximize small starting coordinates between a min value per dimensions and 1, so we're not nulling border row, then minimize the big starting coords so they're not above end.
+	#Is there a chance big ones are smaller than small ones? Would it draw too slim rooms per my specs of width 3?
 	first_coords = max(first_room_center[0]-int(first_dimensions[0]/2), 1), max(first_room_center[1]-int(first_dimensions[1]/2), 1), min(first_room_center[0]+int(first_dimensions[0]/2), mapwidth-1), min(first_room_center[1]+int(first_dimensions[1]/2), mapheight-1)
-#	print(first_coords)
 	cave[first_coords[0]:first_coords[2], first_coords[1]:first_coords[3]] = 0
-		#randomize room width and height so it's drawn at least 1 from nearest edge
-			#must be 3-20 each
-		#draw room by its coords as follows: e.g. cave[4:8, 4:12] = 0
 	#while there's room left, attempt to draw more rooms up to amount
 	#connect rooms with corridors
 
