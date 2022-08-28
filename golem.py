@@ -32,9 +32,9 @@ def create_rooms_recursive():
             y2 = np.random.randint((corners[3] + corners[1])/2, corners[3])
             cave[x1:x2, y1:y2] = 0
             roomcenters.append([int((x1+x2)/2), int((y1+y2)/2)])
-    
+
     binroom([1, 1, mapwidth, mapheight], 0)
-    
+
     def erode(x, y):
         cave[x, y] = 0
         for neighbor in [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]:
@@ -44,7 +44,7 @@ def create_rooms_recursive():
         for j in range(mapheight):
             if cave[i,j] == 0:
                 erode(i, j)
-                
+
     roomsconnected = np.zeros(len(roomcenters))
     roomsconnected[np.random.randint(len(roomcenters))] = 1
     while not roomsconnected.all():
@@ -61,20 +61,20 @@ def create_rooms_recursive():
                 coords[axis] -= 1
             cave[coords[0], coords[1]] = 0
         roomsconnected[i] = 1
-    
-create_rooms_recursive()     
+
+create_rooms_recursive()
 
 class Creature():
     def __init__(self):
         self.char = '@'
         self.x = 0
         self.y = 0
-    
+
     def move(self, x, y):
         if cave[self.x+x, self.y+y] == 0:
             self.y += y
             self.x += x
-        
+
 
 player = Creature()
 while cave[player.x, player.y] != 0:
