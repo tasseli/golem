@@ -9,13 +9,13 @@ win = pygcurse.PygcurseWindow(mapwidth, mapheight)
 win.autoupdate = False
 cave = np.ones((mapwidth, mapheight))
 
-def create_rooms_recursive():
+def erode(x, y):
+    cave[x, y] = 0
+    for neighbor in [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]:
+        if 0 < neighbor[0] < mapwidth-1 and 0 < neighbor[1] < mapheight-1 and cave[neighbor] == 1 and np.random.randint(4) == 0:
+            erode(neighbor[0], neighbor[1])
 
-    def erode(x, y):
-        cave[x, y] = 0
-        for neighbor in [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]:
-            if 0 < neighbor[0] < mapwidth-1 and 0 < neighbor[1] < mapheight-1 and cave[neighbor] == 1 and np.random.randint(4) == 0:
-                erode(neighbor[0], neighbor[1])
+def create_rooms_recursive():
 
     roomcenters = []
     def binroom(corners, axis):
