@@ -17,7 +17,13 @@ def erode(x, y):
 
 def create_rooms_mikae1():
 	rooms_to_be_created = np.random.randint(2, 11)
-		#randomize a room center so it's at least 2 from the nearest edge
+	first_room_center = np.random.randint(2, mapwidth-2), np.random.randint(2, mapheight-2)
+#	print(first_room_center)
+	first_dimensions = np.random.randint(3, 21), np.random.randint(3, 21) #I should probably check the upper limit values
+	#maximize starting coordinates between a min value per dimensions and 1, so we're not nulling border row
+	first_coords = max(first_room_center[0]-int(first_dimensions[0]/2), 1), max(first_room_center[1]-int(first_dimensions[1]/2), 1), min(first_room_center[0]+int(first_dimensions[0]/2), mapwidth-1), min(first_room_center[1]+int(first_dimensions[1]/2), mapheight-1)
+#	print(first_coords)
+	cave[first_coords[0]:first_coords[2], first_coords[1]:first_coords[3]] = 0
 		#randomize room width and height so it's drawn at least 1 from nearest edge
 			#must be 3-20 each
 		#draw room by its coords as follows: e.g. cave[4:8, 4:12] = 0
