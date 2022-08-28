@@ -10,6 +10,13 @@ win.autoupdate = False
 cave = np.ones((mapwidth, mapheight))
 
 def create_rooms_recursive():
+
+    def erode(x, y):
+        cave[x, y] = 0
+        for neighbor in [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]:
+            if 0 < neighbor[0] < mapwidth-1 and 0 < neighbor[1] < mapheight-1 and cave[neighbor] == 1 and np.random.randint(4) == 0:
+                erode(neighbor[0], neighbor[1])
+
     roomcenters = []
     def binroom(corners, axis):
         #print(repr(corners))
@@ -35,11 +42,7 @@ def create_rooms_recursive():
 
     binroom([1, 1, mapwidth, mapheight], 0)
 
-    def erode(x, y):
-        cave[x, y] = 0
-        for neighbor in [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]:
-            if 0 < neighbor[0] < mapwidth-1 and 0 < neighbor[1] < mapheight-1 and cave[neighbor] == 1 and np.random.randint(4) == 0:
-                erode(neighbor[0], neighbor[1])
+    # time to erode
     for i in range(mapwidth):
         for j in range(mapheight):
             if cave[i,j] == 0:
@@ -63,6 +66,8 @@ def create_rooms_recursive():
         roomsconnected[i] = 1
 
 create_rooms_recursive()
+
+
 
 class Creature():
     def __init__(self):
