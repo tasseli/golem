@@ -16,8 +16,10 @@ def erode(x, y):
             erode(neighbor[0], neighbor[1])
 
 def create_rooms_mikae1():
-    cave[4:8, 4:12] = 0
-    return
+    #randomize amount of rooms
+	#draw first room
+	#while there's room left, attempt to draw more rooms up to amount
+	#connect rooms with corridors
 
 create_rooms_mikae1()
 
