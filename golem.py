@@ -26,7 +26,7 @@ def create_rooms_mikae1():
 		first_coords = max(first_room_center[0]-int(first_dimensions[0]/2), 1), max(first_room_center[1]-int(first_dimensions[1]/2), 1), min(first_room_center[0]+int(first_dimensions[0]/2), mapwidth-1), min(first_room_center[1]+int(first_dimensions[1]/2), mapheight-1)
 	cave[first_coords[0]:first_coords[2], first_coords[1]:first_coords[3]] = 0
 	rooms_created = 1
-	for i in 100:
+	for i in range(0, 100):
 		result = np.all(cave == cave[1])
 		if result:
 			print("checks out")
