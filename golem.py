@@ -15,9 +15,16 @@ def erode(x, y):
         if 0 < neighbor[0] < mapwidth-1 and 0 < neighbor[1] < mapheight-1 and cave[neighbor] == 1 and np.random.randint(4) == 0:
             erode(neighbor[0], neighbor[1])
 
+def create_straight_corridor(start_coord, direction, length, cave):
+	#let direction be 0=="East", 1=="North", 2=="West", 3=="South"
+	#this simple function doesn't make checks, they must be done outside
+	if (direction == 0):
+		cave[start_coord[0]:start_coord[0]+length, start_coord[1]] = 0
+
 def create_rooms_mikae1():
 	rooms_to_be_created = np.random.randint(2, 11)
 	first_room_center = np.random.randint(2, mapwidth-2), np.random.randint(2, mapheight-2)
+	last_center = first_room_center
 	#maximize small starting coordinates between a min value per dimensions and 1, so we're not nulling border row, then minimize the big starting coords so they're not above end.
 	#Is there a chance big ones are smaller than small ones? Would it draw too slim rooms per my specs of width 3?
 	first_coords = 0,0,0,0
@@ -43,6 +50,8 @@ def create_rooms_mikae1():
 	#connect rooms with corridors
 
 create_rooms_mikae1()
+create_straight_corridor((2,3),0,36,cave)
+create_straight_corridor((7,5),0,36,cave)
 
 class Creature():
     def __init__(self):
