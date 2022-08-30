@@ -20,6 +20,12 @@ def create_straight_corridor(start_coord, direction, length, cave):
 	#this simple function doesn't make checks, they must be done outside
 	if (direction == 0):
 		cave[start_coord[0]:start_coord[0]+length, start_coord[1]] = 0
+	if (direction == 1):
+		cave[start_coord[0], start_coord[1]-length:start_coord[1]] = 0
+	if (direction == 2):
+		cave[start_coord[0]-length:start_coord[0], start_coord[1]] = 0
+	if (direction == 3):
+		cave[start_coord[0], start_coord[1]:start_coord[1]+length] = 0
 
 def create_rooms_mikae1():
 	rooms_to_be_created = np.random.randint(2, 11)
@@ -51,7 +57,9 @@ def create_rooms_mikae1():
 
 create_rooms_mikae1()
 create_straight_corridor((2,3),0,36,cave)
-create_straight_corridor((7,5),0,36,cave)
+create_straight_corridor((4,31),1,16,cave)
+create_straight_corridor((37,31),2,22,cave)
+create_straight_corridor((60,4),3,31,cave)
 
 class Creature():
     def __init__(self):
