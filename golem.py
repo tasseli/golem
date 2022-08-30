@@ -27,6 +27,22 @@ def create_straight_corridor(start_coord, direction, length, cave):
 	if (direction == 3):
 		cave[start_coord[0], start_coord[1]:start_coord[1]+length] = 0
 
+def connect_centers(center1, center2, cave):
+	current_point = [center1[0],center1[1]]
+	while (current_point[0] != center2[0] and current_point[1] != center2[1]):
+		if (current_point[0]-center2[0] > 0):
+			create_straight_corridor(current_point, 2, current_point[0]-center2[0], cave)
+			current_point[0] -= center1[0]-center2[0]
+		if (current_point[1]-center2[1] > 0):
+			create_straight_corridor(current_point, 3, current_point[1]-center2[1], cave)
+			current_point[1] += center1[0]-center2[0]
+		if (center2[0]-current_point[0] > 0):
+			create_straight_corridor(current_point, 0, center2[0]-current_point[0], cave)
+			current_point[0] += center1[0]-center2[0]
+		if (center2[1]-current_point[1] > 0):
+			create_straight_corridor(current_point, 1, center2[1]-current_point[1], cave)
+			current_point[1] -= center1[0]-center2[0]
+
 def create_rooms_mikae1():
 	rooms_to_be_created = np.random.randint(2, 11)
 	first_room_center = np.random.randint(2, mapwidth-2), np.random.randint(2, mapheight-2)
@@ -47,19 +63,15 @@ def create_rooms_mikae1():
 			min(room_center[1]+int(dimensions[1]/2), mapheight-1)
 		result = np.all(cave[coords[0]:coords[2], coords[1]:coords[3]] == 1)
 		if result:
-			print("checks out")
 			cave[coords[0]:coords[2], coords[1]:coords[3]] = 0
 			rooms_created += 1
+#			connect_centers(room_center, last_center, cave)
+			last_center = room_center[0], room_center[1]
 		if rooms_created == rooms_to_be_created:
+			print("We've made enough rooms.")
 			break
-	#while there's room left, attempt to draw more rooms up to amount
-	#connect rooms with corridors
 
 create_rooms_mikae1()
-create_straight_corridor((2,3),0,36,cave)
-create_straight_corridor((4,31),1,16,cave)
-create_straight_corridor((37,31),2,22,cave)
-create_straight_corridor((60,4),3,31,cave)
 
 class Creature():
     def __init__(self):
