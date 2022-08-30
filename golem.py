@@ -31,17 +31,8 @@ def connect_centers(center1, center2, cave):
 	current_point = [center1[0],center1[1]]
 	while (current_point[0] != center2[0] and current_point[1] != center2[1]):
 		if (current_point[0]-center2[0] > 0):
-			create_straight_corridor(current_point, 2, current_point[0]-center2[0], cave)
-			current_point[0] -= center1[0]-center2[0]
-		if (current_point[1]-center2[1] > 0):
-			create_straight_corridor(current_point, 3, current_point[1]-center2[1], cave)
-			current_point[1] += center1[0]-center2[0]
-		if (center2[0]-current_point[0] > 0):
-			create_straight_corridor(current_point, 0, center2[0]-current_point[0], cave)
-			current_point[0] += center1[0]-center2[0]
-		if (center2[1]-current_point[1] > 0):
-			create_straight_corridor(current_point, 1, center2[1]-current_point[1], cave)
-			current_point[1] -= center1[0]-center2[0]
+			return
+		break
 
 def create_rooms_mikae1():
 	rooms_to_be_created = np.random.randint(2, 11)
